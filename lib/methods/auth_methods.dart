@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:your_project_name/models/user.dart'; // Replace with your actual project name
 
 class AuthMethods {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -51,6 +52,17 @@ class AuthMethods {
       return 'success';
     } catch (e) {
       return e.toString();
+    }
+  }
+
+  Future<Users> getUserDetails() async {
+    try {
+      User? user = _auth.currentUser;
+      DocumentSnapshot userSnapshot =
+          await _firestore.collection("users").doc(user!.uid).get();
+      return Users.fromSnap(userSnapshot);
+    } catch (e) {
+      throw Exception('Failed to get user details: $e');
     }
   }
 }
