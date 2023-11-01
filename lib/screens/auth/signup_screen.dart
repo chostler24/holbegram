@@ -29,7 +29,34 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    // Implement your UI here
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+
+            const SizedBox(height: 24),
+            TextFieldInput(
+              controller: widget.emailController,
+              isPassword: false,
+              hintText: 'Email',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            TextButton(
+              onPressed: () {
+              },
+              child: Text(
+                "Already have an account? Log in",
+                style: TextStyle(
+                  color: Color.fromARGB(218, 226, 37, 24),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
