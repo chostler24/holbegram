@@ -46,10 +46,41 @@ class _AddImageState extends State<AddImage> {
 
   void uploadPost() {
     // Add your logic to upload the post
-    // Navigate to the Home page
+    void uploadPost() async {
+      if (_image != null) {
+        // Show a loading indicator while the post is being uploaded
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        );
+
+        // Upload the post
+        String imageUrl = await _authMethods.uploadImage(_image!);
+
+        // Hide the loading indicator
+        Navigator.pop(context);
+
+        // Navigate to the Home page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage()),
+        );
+      } else {
+        // Show an error message if no image is selected
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please select an image to upload.'),
+          ),
+        );
+      }
+    }
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Home()), // Replace 'Home' with your actual home screen
+      MaterialPageRoute(builder: (context) => MyHomePage()),
     );
   }
 

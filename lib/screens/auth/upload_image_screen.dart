@@ -62,7 +62,69 @@ class _AddPictureState extends State<AddPicture> {
 
   @override
   Widget build(BuildContext context) {
-    // Implement your UI here
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (_image != null)
+          CircleAvatar(
+            radius: 60,
+            backgroundImage: MemoryImage(_image!),
+          ),
+        SizedBox(height: 20),
+        InkWell(
+          onTap: selectImageFromGallery,
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              'Select Image from Gallery',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        InkWell(
+          onTap: selectImageFromCamera,
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              'Take Picture with Camera',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        FlatButton(
+          onPressed: _image == null ? null : _handleSignUp,
+          child: Text(
+            'Sign Up',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+            ),
+          ),
+          color: Colors.blue,
+          disabledColor: Colors.grey,
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ],
+    )
     return Container();
   }
 }
