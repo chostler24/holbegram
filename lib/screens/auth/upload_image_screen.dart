@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'auth_methods.dart';
 
 class AddPicture extends StatefulWidget {
   final String email;
@@ -18,6 +19,7 @@ class AddPicture extends StatefulWidget {
 
 class _AddPictureState extends State<AddPicture> {
   Uint8List? _image;
+  AuthMethods _authMethods = AuthMethods();
 
   void selectImageFromGallery() async {
     final picker = ImagePicker();
@@ -38,6 +40,23 @@ class _AddPictureState extends State<AddPicture> {
       setState(() {
         _image = File(pickedFile.path).readAsBytesSync();
       });
+    }
+  }
+
+  void _handleSignUp() async {
+    String result = await _authMethods.signUpUser(
+      email: widget.email,
+      password: widget.password,
+      username: widget.username,
+      file: _image,
+    );
+
+    if (result == 'success') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Success'),
+        ),
+      );
     }
   }
 
