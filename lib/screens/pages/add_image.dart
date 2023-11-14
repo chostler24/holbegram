@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'auth_methods.dart';
 import 'upload_image_screen.dart';
 
-class AddImage extends StatefulWidget {
+class AddImage extends StatefulWidget { // Much like the AddPicture class, this class is a StatefulWidget
   final String email;
   final String password;
   final String username;
